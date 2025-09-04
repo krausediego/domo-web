@@ -8,42 +8,89 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createRootRoute } from '@tanstack/react-router'
-
+import { Route as rootRouteImport } from './pages/__root'
+import { Route as AppIndexRouteImport } from './pages/_app/index'
 import { Route as AuthSignInRouteImport } from './pages/_auth/sign-in'
+import { Route as AppAuthenticatedLayoutRouteImport } from './pages/_app/_authenticated/layout'
+import { Route as AppAuthenticatedOverviewIndexRouteImport } from './pages/_app/_authenticated/overview/index'
+import { Route as AppAuthenticatedCalendarIndexRouteImport } from './pages/_app/_authenticated/calendar/index'
 
-const rootRouteImport = createRootRoute()
-
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/_app/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthSignInRoute = AuthSignInRouteImport.update({
   id: '/_auth/sign-in',
   path: '/sign-in',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppAuthenticatedLayoutRoute = AppAuthenticatedLayoutRouteImport.update({
+  id: '/_app/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppAuthenticatedOverviewIndexRoute =
+  AppAuthenticatedOverviewIndexRouteImport.update({
+    id: '/overview/',
+    path: '/overview/',
+    getParentRoute: () => AppAuthenticatedLayoutRoute,
+  } as any)
+const AppAuthenticatedCalendarIndexRoute =
+  AppAuthenticatedCalendarIndexRouteImport.update({
+    id: '/calendar/',
+    path: '/calendar/',
+    getParentRoute: () => AppAuthenticatedLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/sign-in': typeof AuthSignInRoute
+  '/': typeof AppIndexRoute
+  '/calendar': typeof AppAuthenticatedCalendarIndexRoute
+  '/overview': typeof AppAuthenticatedOverviewIndexRoute
 }
 export interface FileRoutesByTo {
   '/sign-in': typeof AuthSignInRoute
+  '/': typeof AppIndexRoute
+  '/calendar': typeof AppAuthenticatedCalendarIndexRoute
+  '/overview': typeof AppAuthenticatedOverviewIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/_app/_authenticated': typeof AppAuthenticatedLayoutRouteWithChildren
   '/_auth/sign-in': typeof AuthSignInRoute
+  '/_app/': typeof AppIndexRoute
+  '/_app/_authenticated/calendar/': typeof AppAuthenticatedCalendarIndexRoute
+  '/_app/_authenticated/overview/': typeof AppAuthenticatedOverviewIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/sign-in'
+  fullPaths: '/sign-in' | '/' | '/calendar' | '/overview'
   fileRoutesByTo: FileRoutesByTo
-  to: '/sign-in'
-  id: '__root__' | '/_auth/sign-in'
+  to: '/sign-in' | '/' | '/calendar' | '/overview'
+  id:
+    | '__root__'
+    | '/_app/_authenticated'
+    | '/_auth/sign-in'
+    | '/_app/'
+    | '/_app/_authenticated/calendar/'
+    | '/_app/_authenticated/overview/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  AppAuthenticatedLayoutRoute: typeof AppAuthenticatedLayoutRouteWithChildren
   AuthSignInRoute: typeof AuthSignInRoute
+  AppIndexRoute: typeof AppIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_app/': {
+      id: '/_app/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_auth/sign-in': {
       id: '/_auth/sign-in'
       path: '/sign-in'
@@ -51,11 +98,50 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthSignInRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/_authenticated': {
+      id: '/_app/_authenticated'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AppAuthenticatedLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/_authenticated/overview/': {
+      id: '/_app/_authenticated/overview/'
+      path: '/overview'
+      fullPath: '/overview'
+      preLoaderRoute: typeof AppAuthenticatedOverviewIndexRouteImport
+      parentRoute: typeof AppAuthenticatedLayoutRoute
+    }
+    '/_app/_authenticated/calendar/': {
+      id: '/_app/_authenticated/calendar/'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof AppAuthenticatedCalendarIndexRouteImport
+      parentRoute: typeof AppAuthenticatedLayoutRoute
+    }
   }
 }
 
+interface AppAuthenticatedLayoutRouteChildren {
+  AppAuthenticatedCalendarIndexRoute: typeof AppAuthenticatedCalendarIndexRoute
+  AppAuthenticatedOverviewIndexRoute: typeof AppAuthenticatedOverviewIndexRoute
+}
+
+const AppAuthenticatedLayoutRouteChildren: AppAuthenticatedLayoutRouteChildren =
+  {
+    AppAuthenticatedCalendarIndexRoute: AppAuthenticatedCalendarIndexRoute,
+    AppAuthenticatedOverviewIndexRoute: AppAuthenticatedOverviewIndexRoute,
+  }
+
+const AppAuthenticatedLayoutRouteWithChildren =
+  AppAuthenticatedLayoutRoute._addFileChildren(
+    AppAuthenticatedLayoutRouteChildren,
+  )
+
 const rootRouteChildren: RootRouteChildren = {
+  AppAuthenticatedLayoutRoute: AppAuthenticatedLayoutRouteWithChildren,
   AuthSignInRoute: AuthSignInRoute,
+  AppIndexRoute: AppIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
