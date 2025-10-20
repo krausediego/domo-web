@@ -57,7 +57,7 @@ export function CalendarDayView({ singleDayEvents, multiDayEvents }: IProps) {
           />
 
           {/* Day header */}
-          <div className="relative z-20 flex border-b">
+          <div className="relative z-2 flex border-b">
             <div className="w-18"></div>
             <span className="text-muted-foreground flex-1 border-l py-2 text-center text-xs font-medium">
               {format(selectedDate, "EE")}{" "}

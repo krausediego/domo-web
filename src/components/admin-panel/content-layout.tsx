@@ -1,18 +1,26 @@
 import { Navbar } from "@/components/admin-panel/navbar";
-
-import { Separator } from "../ui/separator";
+import { cn } from "@/lib/utils";
 
 interface ContentLayoutProps {
   title: string;
   children: React.ReactNode;
+  className?: string;
 }
 
-export function ContentLayout({ title, children }: ContentLayoutProps) {
+export function ContentLayout({
+  title,
+  children,
+  className,
+}: ContentLayoutProps) {
   return (
-    <div>
+    <div className="bg-sidebar">
       <Navbar title={title} />
-      <div className="w-full px-4 pb-8 sm:px-8">
-        <Separator className="mb-8" />
+      <div
+        className={cn(
+          "bg-background flex w-full flex-col rounded-tl-2xl p-8 px-4 sm:px-8",
+          className,
+        )}
+      >
         {children}
       </div>
     </div>

@@ -1,11 +1,10 @@
 import {
-  Calendar1,
-  HomeIcon,
-  type LucideIcon,
-  Settings,
-  Users,
-  Wrench,
-} from "lucide-react";
+  CalendarDaysIcon,
+  Cog8ToothIcon,
+  LockClosedIcon,
+  SquaresPlusIcon,
+  UsersIcon,
+} from "@heroicons/react/24/outline";
 
 type Submenu = {
   href: string;
@@ -17,7 +16,12 @@ type Menu = {
   href: string;
   label: string;
   active?: boolean;
-  icon: LucideIcon;
+  icon: React.ForwardRefExoticComponent<
+    Omit<React.SVGProps<SVGSVGElement>, "ref"> & {
+      title?: string;
+      titleId?: string;
+    } & React.RefAttributes<SVGSVGElement>
+  >;
   submenus?: Submenu[];
 };
 
@@ -29,42 +33,42 @@ type Group = {
 export function getMenuList(): Group[] {
   return [
     {
-      groupLabel: "Controle",
+      groupLabel: "GESTÃO",
       menus: [
         {
           href: "/overview",
           label: "Visão geral",
-          icon: HomeIcon,
+          icon: SquaresPlusIcon,
         },
       ],
     },
     {
-      groupLabel: "Gerenciamento",
+      groupLabel: "CONTROLE",
       menus: [
         {
           href: "/calendar",
           label: "Agenda",
-          icon: Calendar1,
+          icon: CalendarDaysIcon,
         },
       ],
     },
     {
-      groupLabel: "Administrativo",
+      groupLabel: "GERENCIAMENTO",
       menus: [
         {
           href: "/users",
           label: "Usuários",
-          icon: Users,
+          icon: UsersIcon,
         },
         {
           href: "/roles",
-          label: "Permissões",
-          icon: Wrench,
+          label: "Papéis",
+          icon: LockClosedIcon,
         },
         {
           href: "/settings",
           label: "Configurações",
-          icon: Settings,
+          icon: Cog8ToothIcon,
         },
       ],
     },

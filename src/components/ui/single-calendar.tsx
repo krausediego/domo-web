@@ -36,11 +36,11 @@ function SingleCalendar({
         nav: "space-x-1 flex items-center",
         button_previous: cn(
           buttonVariants({ variant: "outline" }),
-          "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 absolute top-0 left-1 z-20",
+          "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 absolute top-0 left-1 z-2",
         ),
         button_next: cn(
           buttonVariants({ variant: "outline" }),
-          "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 absolute top-0 right-1 z-20",
+          "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 absolute top-0 right-1 z-2",
         ),
         month_grid: "w-full border-collapse space-y-1",
         weekdays: "flex",
@@ -48,7 +48,7 @@ function SingleCalendar({
           "text-muted-foreground rounded-md w-8 font-normal text-[0.8rem]",
         week: "flex w-full mt-2",
         day: cn(
-          "relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected].day-range-end)]:rounded-r-md",
+          "relative p-0 text-center text-sm focus-within:relative focus-within:z-2 [&:has([aria-selected])]:bg-accent [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected].day-range-end)]:rounded-r-md",
           "[&:has([aria-selected])]:rounded-md",
         ),
         day_button: cn(

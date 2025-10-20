@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './pages/__root'
 import { Route as AppIndexRouteImport } from './pages/_app/index'
 import { Route as AuthSignInRouteImport } from './pages/_auth/sign-in'
 import { Route as AppAuthenticatedLayoutRouteImport } from './pages/_app/_authenticated/layout'
+import { Route as AppAuthenticatedUsersIndexRouteImport } from './pages/_app/_authenticated/users/index'
+import { Route as AppAuthenticatedRolesIndexRouteImport } from './pages/_app/_authenticated/roles/index'
 import { Route as AppAuthenticatedOverviewIndexRouteImport } from './pages/_app/_authenticated/overview/index'
 import { Route as AppAuthenticatedCalendarIndexRouteImport } from './pages/_app/_authenticated/calendar/index'
 
@@ -29,6 +31,18 @@ const AppAuthenticatedLayoutRoute = AppAuthenticatedLayoutRouteImport.update({
   id: '/_app/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppAuthenticatedUsersIndexRoute =
+  AppAuthenticatedUsersIndexRouteImport.update({
+    id: '/users/',
+    path: '/users/',
+    getParentRoute: () => AppAuthenticatedLayoutRoute,
+  } as any)
+const AppAuthenticatedRolesIndexRoute =
+  AppAuthenticatedRolesIndexRouteImport.update({
+    id: '/roles/',
+    path: '/roles/',
+    getParentRoute: () => AppAuthenticatedLayoutRoute,
+  } as any)
 const AppAuthenticatedOverviewIndexRoute =
   AppAuthenticatedOverviewIndexRouteImport.update({
     id: '/overview/',
@@ -47,12 +61,16 @@ export interface FileRoutesByFullPath {
   '/': typeof AppIndexRoute
   '/calendar': typeof AppAuthenticatedCalendarIndexRoute
   '/overview': typeof AppAuthenticatedOverviewIndexRoute
+  '/roles': typeof AppAuthenticatedRolesIndexRoute
+  '/users': typeof AppAuthenticatedUsersIndexRoute
 }
 export interface FileRoutesByTo {
   '/sign-in': typeof AuthSignInRoute
   '/': typeof AppIndexRoute
   '/calendar': typeof AppAuthenticatedCalendarIndexRoute
   '/overview': typeof AppAuthenticatedOverviewIndexRoute
+  '/roles': typeof AppAuthenticatedRolesIndexRoute
+  '/users': typeof AppAuthenticatedUsersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -61,12 +79,14 @@ export interface FileRoutesById {
   '/_app/': typeof AppIndexRoute
   '/_app/_authenticated/calendar/': typeof AppAuthenticatedCalendarIndexRoute
   '/_app/_authenticated/overview/': typeof AppAuthenticatedOverviewIndexRoute
+  '/_app/_authenticated/roles/': typeof AppAuthenticatedRolesIndexRoute
+  '/_app/_authenticated/users/': typeof AppAuthenticatedUsersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/sign-in' | '/' | '/calendar' | '/overview'
+  fullPaths: '/sign-in' | '/' | '/calendar' | '/overview' | '/roles' | '/users'
   fileRoutesByTo: FileRoutesByTo
-  to: '/sign-in' | '/' | '/calendar' | '/overview'
+  to: '/sign-in' | '/' | '/calendar' | '/overview' | '/roles' | '/users'
   id:
     | '__root__'
     | '/_app/_authenticated'
@@ -74,6 +94,8 @@ export interface FileRouteTypes {
     | '/_app/'
     | '/_app/_authenticated/calendar/'
     | '/_app/_authenticated/overview/'
+    | '/_app/_authenticated/roles/'
+    | '/_app/_authenticated/users/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -105,6 +127,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAuthenticatedLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/_authenticated/users/': {
+      id: '/_app/_authenticated/users/'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof AppAuthenticatedUsersIndexRouteImport
+      parentRoute: typeof AppAuthenticatedLayoutRoute
+    }
+    '/_app/_authenticated/roles/': {
+      id: '/_app/_authenticated/roles/'
+      path: '/roles'
+      fullPath: '/roles'
+      preLoaderRoute: typeof AppAuthenticatedRolesIndexRouteImport
+      parentRoute: typeof AppAuthenticatedLayoutRoute
+    }
     '/_app/_authenticated/overview/': {
       id: '/_app/_authenticated/overview/'
       path: '/overview'
@@ -125,12 +161,16 @@ declare module '@tanstack/react-router' {
 interface AppAuthenticatedLayoutRouteChildren {
   AppAuthenticatedCalendarIndexRoute: typeof AppAuthenticatedCalendarIndexRoute
   AppAuthenticatedOverviewIndexRoute: typeof AppAuthenticatedOverviewIndexRoute
+  AppAuthenticatedRolesIndexRoute: typeof AppAuthenticatedRolesIndexRoute
+  AppAuthenticatedUsersIndexRoute: typeof AppAuthenticatedUsersIndexRoute
 }
 
 const AppAuthenticatedLayoutRouteChildren: AppAuthenticatedLayoutRouteChildren =
   {
     AppAuthenticatedCalendarIndexRoute: AppAuthenticatedCalendarIndexRoute,
     AppAuthenticatedOverviewIndexRoute: AppAuthenticatedOverviewIndexRoute,
+    AppAuthenticatedRolesIndexRoute: AppAuthenticatedRolesIndexRoute,
+    AppAuthenticatedUsersIndexRoute: AppAuthenticatedUsersIndexRoute,
   }
 
 const AppAuthenticatedLayoutRouteWithChildren =

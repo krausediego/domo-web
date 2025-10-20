@@ -1,4 +1,5 @@
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import { useMutation } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { Lock, MessageCircleQuestionMark, Scroll, User } from "lucide-react";
 import { type SubmitHandler, useForm } from "react-hook-form";
@@ -23,6 +24,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { signInService } from "@/services/auth";
 
 const signInSchema = z.object({
   email: z.email({ error: "Digite um e-mail válido." }),
@@ -49,8 +51,16 @@ function RouteComponent() {
     resolver: standardSchemaResolver(signInSchema),
   });
 
+  const { mutateAsync: signInFn } = useMutation({
+    mutationFn: signInService,
+  });
+
   const submitForm: SubmitHandler<SignIn> = async (values) => {
-    console.log(values);
+    try {
+      await signInFn({ ...values });
+    } catch (err) {
+      console.log("ERRO", err);
+    }
   };
 
   return (

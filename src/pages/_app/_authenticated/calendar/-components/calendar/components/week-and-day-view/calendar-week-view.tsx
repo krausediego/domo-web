@@ -55,7 +55,7 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
           />
 
           {/* Week header */}
-          <div className="relative z-20 flex border-b">
+          <div className="relative z-2 flex border-b">
             <div className="w-18"></div>
             <div className="grid flex-1 grid-cols-7 divide-x border-l">
               {weekDays.map((day, index) => (

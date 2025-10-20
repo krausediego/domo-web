@@ -1,14 +1,10 @@
-import { Link } from "@tanstack/react-router";
 import { PanelsTopLeft } from "lucide-react";
 
 import { Menu } from "@/components/admin-panel/menu";
 import { SidebarToggle } from "@/components/admin-panel/sidebar-toggle";
-import { Button } from "@/components/ui/button";
 import { useSidebar } from "@/hooks/use-sidebar";
 import { useStore } from "@/hooks/use-store";
 import { cn } from "@/lib/utils";
-
-import { Separator } from "../ui/separator";
 
 export function Sidebar() {
   const sidebar = useStore(useSidebar, (x) => x);
@@ -17,8 +13,8 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        "fixed top-0 left-0 z-20 h-screen -translate-x-full transition-[width] duration-300 ease-in-out lg:translate-x-0",
-        !getOpenState() ? "w-[90px]" : "w-72",
+        "fixed top-0 left-0 z-19 h-screen -translate-x-full shadow-[4px_0_10px_-10px_rgba(0,0,0,0.3)] transition-[width] duration-300 ease-in-out lg:translate-x-0",
+        !getOpenState() ? "w-[92px]" : "w-60",
         settings.disabled && "hidden",
       )}
     >
@@ -26,31 +22,21 @@ export function Sidebar() {
       <div
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
-        className="border-border/60 relative flex h-full flex-col overflow-y-auto border-r px-3 py-4 dark:shadow-zinc-800"
+        className="bg-sidebar relative flex h-full flex-col px-3 py-4 shadow-zinc-800"
       >
-        <Button
-          className={cn(
-            "mb-1 transition-transform duration-300 ease-in-out",
-            !getOpenState() ? "translate-x-1" : "translate-x-0",
-          )}
-          variant="ghost"
-          asChild
-        >
-          <Link to="/overview" className="flex items-center gap-2">
-            <PanelsTopLeft className="mr-1 size-5" />
-            <h1
-              className={cn(
-                "text-lg font-bold whitespace-nowrap transition-[transform,opacity,display] duration-300 ease-in-out",
-                !getOpenState()
-                  ? "hidden -translate-x-96 opacity-0"
-                  : "translate-x-0 opacity-100",
-              )}
-            >
-              Domo
-            </h1>
-          </Link>
-        </Button>
-        <Separator />
+        <div className="mt-2.5 mb-6 flex items-center gap-2 pl-4">
+          <PanelsTopLeft className="size-5" />
+          <h1
+            className={cn(
+              "text-lg font-bold whitespace-nowrap transition-[transform,opacity,display] duration-300 ease-in-out",
+              !getOpenState()
+                ? "hidden -translate-x-96 opacity-0"
+                : "translate-x-0 opacity-100",
+            )}
+          >
+            Domo
+          </h1>
+        </div>
         <Menu isOpen={getOpenState()} />
       </div>
     </aside>

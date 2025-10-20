@@ -8,6 +8,17 @@ import type { IEvent, IUser } from "./-components/calendar/interfaces";
 
 export const Route = createFileRoute("/_app/_authenticated/calendar/")({
   component: RouteComponent,
+  head: () => ({
+    meta: [
+      {
+        name: "description",
+        content: "My App is a web application",
+      },
+      {
+        title: "My App",
+      },
+    ],
+  }),
 });
 
 const users: IUser[] = [
@@ -19,8 +30,8 @@ const users: IUser[] = [
 const events: IEvent[] = [
   {
     id: 123,
-    startDate: new Date("2025-09-01T19:00:00-03:00").toISOString(),
-    endDate: new Date("2025-09-01T20:00:00-03:00").toISOString(),
+    startDate: new Date("2025-10-06T19:00:00-03:00").toISOString(),
+    endDate: new Date("2025-10-06T20:00:00-03:00").toISOString(),
     title: "Agendamento",
     color: "green",
     description: "Descrição",
@@ -28,8 +39,8 @@ const events: IEvent[] = [
   },
   {
     id: 1234,
-    startDate: new Date("2025-09-01T09:30:00-03:00").toISOString(),
-    endDate: new Date("2025-09-01T10:00:00-03:00").toISOString(),
+    startDate: new Date("2025-10-06T09:30:00-03:00").toISOString(),
+    endDate: new Date("2025-10-06T10:00:00-03:00").toISOString(),
     title: "Agendamento",
     color: "blue",
     description: "Descrição",
@@ -37,8 +48,8 @@ const events: IEvent[] = [
   },
   {
     id: 1235,
-    startDate: new Date("2025-09-01T11:00:00-03:00").toISOString(),
-    endDate: new Date("2025-09-01T12:00:00-03:00").toISOString(),
+    startDate: new Date("2025-10-06T11:00:00-03:00").toISOString(),
+    endDate: new Date("2025-10-06T12:00:00-03:00").toISOString(),
     title: "Agendamento",
     color: "orange",
     description: "Descrição",
@@ -46,26 +57,44 @@ const events: IEvent[] = [
   },
   {
     id: 1236,
-    startDate: new Date("2025-09-01T12:30:00-03:00").toISOString(),
-    endDate: new Date("2025-09-01T13:15:00-03:00").toISOString(),
+    startDate: new Date("2025-10-06T12:00:00-03:00").toISOString(),
+    endDate: new Date("2025-10-06T13:00:00-03:00").toISOString(),
     title: "Agendamento",
     color: "purple",
     description: "Descrição",
     user: users[0],
   },
   {
-    id: 1237,
-    startDate: new Date("2025-09-01T13:45:00-03:00").toISOString(),
-    endDate: new Date("2025-09-01T14:10:00-03:00").toISOString(),
+    id: 1236,
+    startDate: new Date("2025-10-06T12:00:00-03:00").toISOString(),
+    endDate: new Date("2025-10-06T13:00:00-03:00").toISOString(),
     title: "Agendamento",
+    color: "green",
+    description: "Descrição",
+    user: users[1],
+  },
+  {
+    id: 1236,
+    startDate: new Date("2025-10-06T12:00:00-03:00").toISOString(),
+    endDate: new Date("2025-10-06T13:00:00-03:00").toISOString(),
+    title: "Agendamento",
+    color: "orange",
+    description: "Descrição",
+    user: users[2],
+  },
+  {
+    id: 1237,
+    startDate: new Date("2025-10-06T13:00:00-03:00").toISOString(),
+    endDate: new Date("2025-10-06T14:10:00-03:00").toISOString(),
+    title: "Julianuuu",
     color: "red",
     description: "Descrição",
     user: users[1],
   },
   {
     id: 1238,
-    startDate: new Date("2025-09-01T14:35:00-03:00").toISOString(),
-    endDate: new Date("2025-09-01T15:00:00-03:00").toISOString(),
+    startDate: new Date("2025-10-06T14:35:00-03:00").toISOString(),
+    endDate: new Date("2025-10-06T15:00:00-03:00").toISOString(),
     title: "Agendamento",
     color: "yellow",
     description: "Descrição",
@@ -73,8 +102,8 @@ const events: IEvent[] = [
   },
   {
     id: 1239,
-    startDate: new Date("2025-09-01T15:10:00-03:00").toISOString(),
-    endDate: new Date("2025-09-01T15:35:00-03:00").toISOString(),
+    startDate: new Date("2025-10-06T15:10:00-03:00").toISOString(),
+    endDate: new Date("2025-10-06T15:35:00-03:00").toISOString(),
     title: "Agendamento",
     color: "gray",
     description: "Descrição",
@@ -82,8 +111,8 @@ const events: IEvent[] = [
   },
   {
     id: 12310,
-    startDate: new Date("2025-09-01T16:00:00-03:00").toISOString(),
-    endDate: new Date("2025-09-01T17:00:00-03:00").toISOString(),
+    startDate: new Date("2025-10-06T16:00:00-03:00").toISOString(),
+    endDate: new Date("2025-10-06T17:00:00-03:00").toISOString(),
     title: "Agendamento",
     color: "green",
     description: "Descrição",

@@ -1,3 +1,4 @@
+import { useMutation } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { LayoutGrid, LogOut, User } from "lucide-react";
 
@@ -18,8 +19,17 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { signOutService } from "@/services/auth";
 
 export function UserNav() {
+  const { mutateAsync } = useMutation({
+    mutationFn: signOutService,
+  });
+
+  const handleSignOut = async () => {
+    await mutateAsync();
+  };
+
   return (
     <DropdownMenu>
       <TooltipProvider disableHoverableContent>
@@ -66,7 +76,10 @@ export function UserNav() {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="hover:cursor-pointer" onClick={() => {}}>
+        <DropdownMenuItem
+          className="hover:cursor-pointer"
+          onClick={handleSignOut}
+        >
           <LogOut className="text-muted-foreground mr-3 h-4 w-4" />
           Sign out
         </DropdownMenuItem>
