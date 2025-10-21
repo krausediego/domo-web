@@ -28,12 +28,26 @@ export const rolesColumns: ColumnDef<RolesResponse>[] = [
   },
   {
     id: "status",
-    accessorKey: "active",
+    accessorKey: "status",
     header: "Status",
     cell: ({ row }) => (
       <Badge>
-        {row.getValue<RolesResponse["active"]>("status") ? "Ativo" : "Inativo"}
+        {row.getValue<RolesResponse["status"]>("status") ? "Ativo" : "Inativo"}
       </Badge>
+    ),
+  },
+  {
+    id: "permissions",
+    accessorKey: "permissions",
+    header: "Permissões",
+    cell: ({ row }) => (
+      <div className="space-x-2">
+        {row
+          .getValue<RolesResponse["permissions"]>("permissions")
+          .map((permission) => (
+            <Badge key={permission.id}>{permission.name}</Badge>
+          ))}
+      </div>
     ),
   },
   {

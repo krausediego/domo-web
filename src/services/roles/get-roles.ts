@@ -5,13 +5,13 @@ import type { PaginatedProps } from "@/types";
 interface RolesResponse {
   id: string;
   name: string;
-  slug: string;
-  active: boolean;
+  status: boolean;
   createdAt: Date;
   updatedAt: Date;
   permissions: {
     id: string;
     slug: string;
+    name: string;
   }[];
 }
 

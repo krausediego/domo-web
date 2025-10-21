@@ -30,8 +30,8 @@ const users: IUser[] = [
 const events: IEvent[] = [
   {
     id: 123,
-    startDate: new Date("2025-10-06T19:00:00-03:00").toISOString(),
-    endDate: new Date("2025-10-06T20:00:00-03:00").toISOString(),
+    startDate: new Date("2025-10-20T21:00:00-03:00").toISOString(),
+    endDate: new Date("2025-10-20T22:00:00-03:00").toISOString(),
     title: "Agendamento",
     color: "green",
     description: "Descrição",
